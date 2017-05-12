@@ -29,7 +29,7 @@ memberships_query = <<EOQ
       ?term p:P31 ?instance_statement .
       ?instance_statement pq:P1545 ?termID .
     }
-    SERVICE wikibase:label { bd:serviceParam wikibase:language "mt,en" . }
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "pt, en" . }
   }
 EOQ
 
@@ -44,5 +44,5 @@ data = sparql(memberships_query).map(&:to_h).map do |r|
   }
 end
 
-ScraperWiki.sqliteexecute('DELETE FROM data') rescue nil
+ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 ScraperWiki.save_sqlite(%i[id term], data)
